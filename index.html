@@ -18,6 +18,56 @@
     <script src="js/scripts/ember-data-localstorage.js" type="text/javascript"></script>
     <script src="js/app/app.js" type="text/javascript"></script>
 
+    <script type="text/x-handlebars" id="notes">
+        <div id="notes" class="azureBlueBackground azureBlueBorderThin">
+            {{input valueBinding="newNoteName"}}
+            <button class="btn btn-default btn-xs"
+            {{action "createNewNote"}}>New Note</button>
+            <div class="list-group" style="margin-top: 10px;">
+                {{#each controller}}
+                {{#link-to "notes.note" this class="list-group-item"}}
+                {{name}}
+                <button class="btn btn-danger btn-xs pull-right"
+                {{action "doDeleteNote" this}}>Delete
+                </button>
+                {{/link-to}}
+                {{/each}}
+            </div>
+        </div>
+        {{outlet}}
+        {{partial confirmDialog}}
+    </script>
+
+    <script type="text/x-handlebars" id="notes/note">
+        <div id="selectedNote">
+            <h1>name: {{name}}</h1>
+            {{view Ember.TextArea valueBinding="value"}}
+            <button class="btn btn-primary form-control mediumTopPadding"
+            {{action "updateNote"}}>Update Note</button>
+        </div>
+    </script>
+
+    <script type="text/x-handlebars" id="confirmDialog">
+        <div id="confirmDeleteNoteDialog" class="modal fade">
+            <div class="modal-content">
+                <div class="modal-header centerAlign">
+                    <h1 class="centerAlign">Delete Selected Note?</h1>
+                </div>
+                <div class="modal-body">Are you sure? This cannot be undone!</div>
+                <div class="modal-footer">
+                    <button class="btn btn-default"
+                    {{action "doCancelDelete"}}>
+                    Cancel
+                    </button>
+                    <button class="btn btn-primary"
+                    {{action "doConfirmDelete"}}>
+                    Delete Note
+                    </button>
+                </div>
+            </div>
+        </div>
+    </script>
+
 </head>
 <body>
 
