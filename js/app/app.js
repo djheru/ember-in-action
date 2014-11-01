@@ -95,7 +95,9 @@ Notes.NotesNoteController = Ember.ObjectController.extend({
             var content = this.get('content');
             console.log('content: ', content);
             if (content) {
+                console.log('saving')
                 content.save();
+                console.log('done saving')
             }
         }
     }
