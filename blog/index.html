@@ -15,6 +15,7 @@
     <script src="js/scripts/ember-1.0.0.js" type="text/javascript"></script>
     <script src="js/scripts/ember-data-beta-1.js" type="text/javascript"></script>
     <script src="js/scripts/ember-data-localstorage.js" type="text/javascript"></script>
+    <script src="js/scripts/showdown.js" type="text/javascript"></script>
     <script src="js/app/app.js" type="text/javascript"></script>
 
     <script type="text/x-handlebars" id="application">
@@ -24,14 +25,28 @@
         </div>
     </script>
 
-    <script type="text/x-handlebars" id="blog">
+    <script type="text/x-handlebars" id="blog/index">
         <div id="blogsArea">
             {{#each controller}}
                 <h1>{{postTitle}}</h1>
                 <div class="postDate">{{formattedDate}}</div>
                 {{postLongIntro}}<br />
-            <hr class="blogSeperator" />
+                {{#link-to "blog.post" this}}
+                    Read Article >>
+                {{/link-to}}
+                <hr class="blogSeperator" />
             {{/each}}
+        </div>
+    </script>
+
+    <script type="text/x-handlebars" id="blog/post">
+        <div id="blogPostArea">
+            <div class="postDate">{{formattedDate}}</div>
+            <br />
+            {{#link-to "blog.index"}}&lt; back{{/link-to}}
+            {{markdown}}
+            <br />
+            {{#link-to "blog.index"}}&lt; back{{/link-to}}
         </div>
     </script>
 
